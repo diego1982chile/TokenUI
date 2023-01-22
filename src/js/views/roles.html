@@ -1,0 +1,129 @@
+<!--
+ Copyright (c) 2014, 2020, Oracle and/or its affiliates.
+ Licensed under The Universal Permissive License (UPL), Version 1.0
+ as shown at https://oss.oracle.com/licenses/upl/
+ -->
+<STYLE TYPE="text/css">
+    
+    .oj-table-column-header-cell:last-child {
+        width: 70px;
+    }
+    
+  .editable {
+      /*width: 4em !important;*/
+      /*max-width: 150px !important;*/
+  }  
+  
+</STYLE>
+
+<SCRIPT>      
+    
+</SCRIPT>
+
+<div class="oj-panel oj-sm-margin-4x">
+ 
+<div class="oj-hybrid-padding">
+  <h1>Roles</h1>
+
+  <hr>
+  <br>  
+      
+  <div id="componentDemoContent" class="oj-flex">    
+      
+    <div id="tableWrapper" class="oj-xl-3 oj-lg-3 oj-md-6 oj-sm-12 oj-flex-item oj-flex">
+
+    <oj-form-layout id="myForm" label-edge="top" columns="1" max-columns="1" style="width:100%"> 
+        
+        <div aria-labelledby="grouplabel1">
+            <oj-input-text id="filter" class="oj-form-control-max-width-md" label-hint="Filter" label-edge="inside"
+                placeholder="Type to filter" on-raw-value-changed="[[handleValueChanged]]" 
+                value="{{filter}}" clear-icon="always">                         
+           </oj-input-text>
+            <oj-button chroming="callToAction" on-oj-action="[[openDialog]]" id='borderlessPushIcon' style="float:right" >                      
+                New Role
+            </oj-button> 
+        </div>               
+        
+        <oj-table id="table" style="width:100%"
+              aria-label="Departments Table"
+              class='oj-bg-body demo-table-container'
+              dnd='{"reorder": {"columns": "enabled"}}'
+              data='[[datasource]]'
+              edit-mode='rowEdit'
+              edit-row='{{editRow}}'
+              on-oj-before-row-edit='[[beforeRowEditListener]]'
+              on-oj-before-row-edit-end='[[beforeRowEditEndListener]]'
+              columns-default.sortable='disabled'              
+              columns='[
+                        {"field": "rolename",                          
+                        "headerText": "Role",                                                    
+                        "template": "clientTemplate"},                                              
+                        { "headerText": "Action",              
+                          "width": "6em",                          
+                          "headerStyle": "text-align: center;",
+                          "style":"padding-top: 0px; padding-bottom: 0px; text-align: center;",
+                          "template": "actionTemplate"}
+                          ]'>
+
+            <template slot="readOnlyTemplate" data-oj-as="cell">
+              <oj-bind-text value="[[cell.data]]"></oj-bind-text>
+            </template>          
+
+            <template slot="clientTemplate" data-oj-as="cell">
+              <oj-bind-if test='[[cell.mode=="navigation"]]'>
+                <oj-bind-text value="[[cell.data]]"></oj-bind-text>
+              </oj-bind-if>
+
+              <oj-bind-if test='[[cell.mode=="edit"]]'>            
+                <oj-input-text id="it1" value="{{rowData.rolename}}" required class="editable"></oj-input-text>
+              </oj-bind-if>
+            </template>
+
+            <template slot="actionTemplate" data-oj-as="cell">
+              <oj-bind-if test='[[cell.mode=="navigation"]]'>
+                <oj-button display='icons' chroming='borderless' on-oj-action="[[handleUpdate]]">
+                  <span slot='startIcon' class="oj-ux-ico-edit"></span>
+                  Edit
+                </oj-button>
+              </oj-bind-if>
+
+              <oj-bind-if test='[[cell.mode=="edit"]]'>
+                <oj-toolbar class="oj-sm-padding-0-vertical">
+                  <oj-button display='icons' on-oj-action="[[handleDone]]">
+                    <span slot='startIcon' class="oj-ux-ico-check"></span>
+                    Save
+                  </oj-button>
+                  <oj-button display='icons' on-oj-action="[[handleCancel]]">
+                    <span slot='startIcon' class="oj-ux-ico-multiply"></span>
+                    Cancel
+                  </oj-button>
+                </oj-toolbar>
+              </oj-bind-if>
+            </template>
+          </oj-table>                          
+
+    </oj-form-layout>   
+        
+    <oj-dialog id="dialog1" dialog-title="New Role" cancel-behavior="icon">
+        <div slot="body">
+            <oj-form-layout id="myForm" label-edge="start" columns="1" max-columns="1" style="width:100%">                                
+              <oj-input-text 
+                  label-hint="Role"                                        
+                  id="newRole"                                                                       
+                  value="{{newRole}}" 
+                  required="required">                                 
+              </oj-input-text>
+            </oj-form-layout> 
+        </div>
+        <div slot="footer">
+            <oj-button id="okButton" chroming="callToAction" on-oj-action="[[createRole]]">Submit</oj-button>
+        </div>
+    </oj-dialog>
+     
+    </div>
+      
+</div>
+  
+</div>
+    
+</div>
