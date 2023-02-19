@@ -57,7 +57,10 @@ define(['knockout', 'ojs/ojcontext', 'ojs/ojmodule-element-utils', 'ojs/ojknocko
             if(this.userLoggedIn && this.userLoggedIn() === "N") {
             //if (currentViewmodel.isDirty) {
                 accept(Promise.reject('model is dirty'));
-                alert("Recurso no autorizado!");
+                //alert("Unauthorized resource!");
+                var rootViewModel = ko.dataFor(document.getElementById('globalBody'));  
+                var msg = "Please login to access this resource";
+                rootViewModel.messages([{severity: 'warning', summary: 'Unauthorized resource', detail: msg, autoTimeout: 5000}]);
             }                        
         }          
         //}
@@ -101,7 +104,7 @@ define(['knockout', 'ojs/ojcontext', 'ojs/ojmodule-element-utils', 'ojs/ojknocko
     
     this.isAdmin = ko.observable(false);
 
-    this.tokenServiceBaseUrl = ko.observable("http://192.168.0.5:8181/TokenService/api/");
+    this.tokenServiceBaseUrl = ko.observable("https://idp.internal.hhack.cl:8181/TokenService/api/");
       
     this.messages = ko.observableArray();
   
@@ -131,6 +134,8 @@ define(['knockout', 'ojs/ojcontext', 'ojs/ojmodule-element-utils', 'ojs/ojknocko
         }
         
         this.router.go({path: 'users'});
+        
+        //$("#navigation").show();
 
     }    
       
@@ -183,6 +188,7 @@ define(['knockout', 'ojs/ojcontext', 'ojs/ojmodule-element-utils', 'ojs/ojknocko
               this.isAdmin = ko.observable(false);
               this.navDataProvider.reset(navData.slice(0,1), {idAttribute: 'id'});                                             
               this.router.go({path: 'login'});   
+              //$("#navigation").hide();
           }
      }
       

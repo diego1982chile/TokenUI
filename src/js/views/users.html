@@ -86,11 +86,14 @@
             
             <template slot="passwordTemplate" data-oj-as="cell">
               <oj-bind-if test='[[cell.mode=="navigation"]]'>                 
-                  <span class="oj-ux-ico-asterisk" style="font-size: x-small"></span>
-                  <span class="oj-ux-ico-asterisk" style="font-size: x-small"></span>
-                  <span class="oj-ux-ico-asterisk" style="font-size: x-small"></span>
-                  <span class="oj-ux-ico-asterisk" style="font-size: x-small"></span>
-                  <span class="oj-ux-ico-asterisk" style="font-size: x-small"></span>
+                  <span class="oj-ux-ico-asterisk" style="font-size: xx-small"></span>
+                  <span class="oj-ux-ico-asterisk" style="font-size: xx-small"></span>
+                  <span class="oj-ux-ico-asterisk" style="font-size: xx-small"></span>
+                  <span class="oj-ux-ico-asterisk" style="font-size: xx-small"></span>
+                  <span class="oj-ux-ico-asterisk" style="font-size: xx-small"></span>
+                  <span class="oj-ux-ico-asterisk" style="font-size: xx-small"></span>
+                  <span class="oj-ux-ico-asterisk" style="font-size: xx-small"></span>
+                  <span class="oj-ux-ico-asterisk" style="font-size: xx-small"></span>
               </oj-bind-if>
 
               <oj-bind-if test='[[cell.mode=="edit"]]'>            
@@ -117,19 +120,19 @@
 
             <template slot="actionTemplate" data-oj-as="cell">
               <oj-bind-if test='[[cell.mode=="navigation"]]'>
-                <oj-button display='icons' chroming='borderless' on-oj-action="[[handleUpdate]]">
+                <oj-button display='icons' chroming='solid' on-oj-action="[[handleUpdate]]">
                   <span slot='startIcon' class="oj-ux-ico-edit"></span>
                   Edit
                 </oj-button>
               </oj-bind-if>
 
               <oj-bind-if test='[[cell.mode=="edit"]]'>
-                <oj-toolbar class="oj-sm-padding-0-vertical">
-                  <oj-button display='icons' on-oj-action="[[handleDone]]">
+                <oj-toolbar class="oj-sm-padding-0-vertical oj-flex oj-sm-flex-items-initial oj-sm-justify-content-center">
+                  <oj-button class="oj-flex-item" display='icons' chroming='solid' on-oj-action="[[handleDone]]">
                     <span slot='startIcon' class="oj-ux-ico-check"></span>
                     Save
                   </oj-button>
-                  <oj-button display='icons' on-oj-action="[[handleCancel]]">
+                  <oj-button class="oj-flex-item" display='icons' chroming='solid' on-oj-action="[[handleCancel]]">
                     <span slot='startIcon' class="oj-ux-ico-multiply"></span>
                     Cancel
                   </oj-button>
@@ -146,7 +149,7 @@
                 
                 <oj-input-text 
                   label-hint="Username"                                        
-                  id="username"                                                                       
+                  id="username" validators="[[emailPatternValidator]]"                                                                       
                   value="{{newUsername}}" 
                   required="required">                                 
                 </oj-input-text>
@@ -163,7 +166,8 @@
                     class="oj-form-control-max-width-md"
                     label-hint="Roles"
                     options="[[roles]]"
-                    value="{{newRoles}}">                    
+                    value="{{newRoles}}"
+                    required="required">                    
                 </oj-select-many>
                 
             </oj-form-layout> 

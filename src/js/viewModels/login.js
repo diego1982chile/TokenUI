@@ -87,7 +87,7 @@ define(["knockout",
                             contentType : "application/json",                    
                             success: function(jwt) {
                                 rootViewModel.userLogin(self.user());                                                                                                   
-                                rootViewModel.authorize(user.username, user.password, jwt.token);                                  
+                                rootViewModel.authorize(user.username, user.password,jwt.token);                                  
                             },
                             error: function (request, status, error) {                                
                                 console.log(request);                                                

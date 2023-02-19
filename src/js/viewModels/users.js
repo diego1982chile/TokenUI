@@ -8,7 +8,8 @@
 /*
  * Your dashboard ViewModel code goes here
  */
-define(['knockout',         
+define(['knockout',        
+        "ojs/ojasyncvalidator-regexp",
         'ojs/ojarraydataprovider',     
         "ojs/ojlistdataproviderview",  
         "ojs/ojdataprovider",
@@ -18,9 +19,10 @@ define(['knockout',
         'ojs/ojtable',
         "ojs/ojbutton", 
         "ojs/ojformlayout",
-        "ojs/ojselectcombobox"
+        "ojs/ojselectcombobox",
+        'ojs/ojknockout-validation'
         ],
- function(ko, ArrayDataProvider, ListDataProviderView, ojdataprovider_1) {
+ function(ko, AsyncRegExpValidator, ArrayDataProvider, ListDataProviderView, ojdataprovider_1) {
      
     function DashboardViewModel() {
         // Below are a set of the ViewModel methods invoked by the oj-module component.
@@ -41,6 +43,14 @@ define(['knockout',
         self.roleArray = ko.observableArray();
         
         self.newRoles = ko.observableArray();
+        
+        self.emailPatternValidator = ko.observableArray([
+            new AsyncRegExpValidator({
+                pattern: "[a-zA-Z0-9.!#$%&'*+\\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*",
+                hint: "enter a valid email format",
+                messageDetail: "Not a valid email format",
+            }),
+        ]);
         
         self.roles = ko.computed(function () { 
                         
