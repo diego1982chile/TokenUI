@@ -26,6 +26,9 @@ define(['knockout', 'ojs/ojcontext', 'ojs/ojmodule-element-utils', 'ojs/ojknocko
 
       document.getElementById('globalBody').addEventListener('announce', announcementHandler, false);
 
+      this.isSmall = ResponsiveKnockoutUtils.createMediaQueryObservable(ResponsiveUtils.getFrameworkQuery(ResponsiveUtils.FRAMEWORK_QUERY_KEY.SM_ONLY));
+      this.isMediumOrUp = ResponsiveKnockoutUtils.createMediaQueryObservable(ResponsiveUtils.getFrameworkQuery(ResponsiveUtils.FRAMEWORK_QUERY_KEY.MD_UP));
+
 
       // Media queries for repsonsive layouts
       const smQuery = ResponsiveUtils.getFrameworkQuery(ResponsiveUtils.FRAMEWORK_QUERY_KEY.SM_ONLY);
@@ -77,6 +80,8 @@ define(['knockout', 'ojs/ojcontext', 'ojs/ojmodule-element-utils', 'ojs/ojknocko
       //this.navDataProvider = new ArrayDataProvider(navData.slice(1), {keyAttributes: "path"});
       
       this.navDataProvider = new oj.ArrayTableDataSource(navData.slice(0,1), {idAttribute: 'id'});
+      
+      this.dataProvider = new ArrayDataProvider(navData.slice(2), {keyAttributes: "path"});
 
       // Drawer
       // Close offcanvas on medium and larger screens

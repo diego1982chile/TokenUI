@@ -55,11 +55,13 @@ html[dir="rtl"] .demo-oracle-icon {
 /* CUSTOM STYLE */
 
 .oj-web-applayout-page {
-    background: #f1f1f3;
+    background: #f1f1f3;    
+    background-image: url("images/wallpaper.png");
 }
 
 .oj-web-applayout-header {
-    background: #1d2733;    
+    background: #1d2733;
+    border-bottom: 3px solid var(--oc-colors-main-fgLighter,#b5bbc2);    
 }
 
 .oj-web-applayout-header span {    
@@ -100,5 +102,16 @@ html[dir="rtl"] .demo-oracle-icon {
 
 .oj-web-applayout-header button:hover {
     background: #1d2733 !important;
+}
+
+.content-header-top {
+    background-image: url("images/content-header-top-4.png");
+    height: .3rem;
+    border-radius: 6px 6px 0 0;
+}
+
+.custom-menu-item {
+    font-size: 1.4em !important;
+    padding: 5px
 }
 

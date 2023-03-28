@@ -1,0 +1,31 @@
+<!--
+ Copyright (c) 2014, 2020, Oracle and/or its affiliates.
+ Licensed under The Universal Permissive License (UPL), Version 1.0
+ as shown at https://oss.oracle.com/licenses/upl/
+ -->
+  <STYLE TYPE="text/css">
+
+      .oj-text-field {
+          max-width: 100em;
+      }
+    
+</STYLE>
+ 
+<div class="oj-hybrid-padding">         
+  
+    <oj-conveyor-belt id="conveyor">
+        
+        <oj-tab-bar edge="top" data="[[dataProvider]]" selection="{{selection.path}}" style="display: inline-flex">
+            <template slot="itemTemplate" data-oj-as="item">
+              <oj-bind-if test="[[item.data.detail]]">
+                <li :id="[[item.data.path]]" style="padding-inline-start: 1em; padding-inline-end: 1em" class="oj-sm-justify-content-center custom-menu-item">             
+                  <oj-bind-text value="[[item.data.detail.label]]"></oj-bind-text>                        
+                </li>
+              </oj-bind-if>
+            </template>
+        </oj-tab-bar>
+        
+        
+    </oj-conveyor-belt>        
+    
+</div>
